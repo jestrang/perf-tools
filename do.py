@@ -1156,8 +1156,12 @@ def main():
     if not do['comm']: do['perf-filter'] = 0
     args.profile_mask &= ~0x4 # disable system-wide profile-step
   if args.delay:
-    if profiling(): do_info('delay profiling by %d seconds' % args.delay)
-    do['perf-common'] += ' -D %d' % (args.delay * 1000)
+    if args.delay == -1:
+      if profiling(): do_info('controlled profiling using fifo')
+      do['perf-common'] += ' -D -1 --control=fifo:/tmp/roi ' 
+    else:
+      if profiling(): do_info('delay profiling by %d seconds' % args.delay)
+      do['perf-common'] += ' -D %d' % (args.delay * 1000)
   if args.cpu:
     if profiling(): do_info('filtered profiling on CPUs: ' + args.cpu)
     do['perf-common'] += ' -C %s' % args.cpu
