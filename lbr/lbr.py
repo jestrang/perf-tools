@@ -220,9 +220,6 @@ def edge_stats(line, lines, xip, size):
       if C.any_in(vecs, ''.join(v2ii2v_srcs)): inc_stat('V2I transition-Penalty')
       elif C.any_in(vecs, v2ii2v_dst): inc_stat('I2V transition-Penalty')
     elif v2ii2v_dst: inc_stat('V2I transition-Penalty')
-  #########################
-  #MoveEliminationDetection
-  #########################
   if x86.is_type(x86.MOV,line):
     me_src=info.srcs()[0]
     me_dst=info.dst()
@@ -237,7 +234,6 @@ def edge_stats(line, lines, xip, size):
         inc_stat('YMM Move-Elimination')
       elif me_src in x86.REGS_ZMM and me_dst in x86.REGS_ZMM:
         inc_stat('ZMM Move-Elimination')
-  #########################
   if size > 1:
     xline = LC.prev_line(lines)
     xinfo = LC.line2info(xline)
