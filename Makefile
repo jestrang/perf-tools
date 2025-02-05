@@ -1,5 +1,5 @@
 .PHONY: clean clean-all help
-AP = workloads/BC.sh 7
+AP = CLTRAMP3D
 APP = taskset 0x4 ./$(AP)
 AP_MT = perf bench numa mem -p 16 -C0-15
 CC = clang
